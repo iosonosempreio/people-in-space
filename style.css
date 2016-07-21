@@ -1,0 +1,50 @@
+body {
+	padding: 0;
+	margin: 0;
+	background-color: #1A1728;
+	font-family: "Droid Sans", sans-serif;
+	/*color: #FFFFC4;*/
+} 
+
+canvas {
+	vertical-align: top;
+}
+
+#p5_loading {
+	width: 100%;
+    background-color: #FFFFC4;
+    padding: 40px 0;
+    color: black;
+    text-align: center;
+    top: 0px;
+    transition: all, 0.5s;
+}
+
+div#text-box {
+	padding: 20px 36px;
+    position: absolute;
+    box-sizing: border-box;
+}
+
+h1 {
+	font-size: 36px;
+	color: white;
+	letter-spacing: 1px;
+	font-style: normal;
+	font-weight: normal;
+}
+
+p {
+	font-size: 18px;
+    color: white;
+    line-height: 22px;
+    letter-spacing: 0.5px;
+    max-width: 700px;
+    margin: 9px 0;
+}
+
+a {
+	color: #C7578E;
+	text-decoration: none;
+}
+

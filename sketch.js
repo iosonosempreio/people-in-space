@@ -29,7 +29,7 @@ function manageErrors(data){
 function setup() {
 
   createCanvas(window.innerWidth,window.innerHeight)
-  frameRate(30)
+  // frameRate(30)
 
   for(var i = 0; i < people.number; i = i + 1){
     positions.push({
@@ -51,6 +51,7 @@ function draw() {
     fill(140,253,200)
     ellipse(d.x,d.y,d.size,d.size)
     fill(255);
+    noStroke();
     textFont("Droid Sans");
     textStyle(BOLD);
     textAlign(CENTER);

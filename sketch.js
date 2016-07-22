@@ -10,7 +10,7 @@ function preload() {
   var someText = createDiv('<h1>'+title+'</h1><p>'+introText+'</p>');
   someText.id('text-box')
 
-  var people = 'http://cors.io/?u=http://api.open-notify.org/astros.json'
+  var people = 'https://crossorigin.me/http://api.open-notify.org/astros.json'
   loadJSON(people, doThings, manageErrors, 'json');
   
 }

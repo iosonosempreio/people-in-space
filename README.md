@@ -4,5 +4,4 @@ Just a first experiment with the incredible <a href="https://p5js.org">p5js</a> 
 
 ###Cool stuff used
 - <a href="https://p5js.org">p5js</a>
-- <a href="https://stocksnap.io/photo/CDFFE6C72E">Background image</a>
 - <a href="https://github.com/technoboy10/crossorigin.me">crossorigin.me</a>

@@ -3,7 +3,7 @@ var positions = [],
     myFontSize = 14,
     palette = ['4882CC','FFFFC4','9F4B26','F3B404','C7578E'],
     introText = '<div class="only-big"><p>This experiment is realised thanks to the awesome <a href="https://p5js.org">p5js</a> library.</p><p>The application connects with a <a href="https://api.open-notify.org/">service</a> that provides in real time the number of astronauts that are on some galactic mission in this precise moment and plot them as floating dots scattered across the space of the window.</p></div><p>Discover more on the <a href="Github Repo">GitHub repo</a>.</p>',
-    title = 'How many people are there in the Outher Space, <b>NOW</b>?',
+    title = 'How many people are there in the Outer Space, <b>NOW</b>?',
     textBoxHeight,
     speed = 3;
 

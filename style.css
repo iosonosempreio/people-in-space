@@ -26,6 +26,12 @@ div#text-box {
     box-sizing: border-box;
 }
 
+.only-big {
+	height:0px;
+	opacity: 0;
+	transition: all,0.5s
+}
+
 h1 {
 	font-size: 36px;
 	color: white;
@@ -48,3 +54,9 @@ a {
 	text-decoration: none;
 }
 
+@media only screen and (min-width: 768px) {
+   .only-big {
+		height:auto;
+		opacity: 1;		
+	} 
+}

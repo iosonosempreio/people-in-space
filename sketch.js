@@ -2,9 +2,10 @@ var positions = [],
     img,
     myFontSize = 14,
     palette = ['4882CC','FFFFC4','9F4B26','F3B404','C7578E'],
-    introText = '<p>This experiment is realised thanks to the awesome <a href="https://p5js.org">p5js</a> library.</p><p>The application connects with a <a href="https://api.open-notify.org/">service</a> that provides in real time the number of astronauts that are on some galactic mission in this precise moment and plot them as floating dots scattered across the space of the window.</p><p>Discover more in the <a href="Github Repo">GitHub repo</a></p>.',
-    title = 'How many people are there in the outher space, <b>NOW</b>?',
-    textBoxHeight;
+    introText = '<div class="only-big"><p>This experiment is realised thanks to the awesome <a href="https://p5js.org">p5js</a> library.</p><p>The application connects with a <a href="https://api.open-notify.org/">service</a> that provides in real time the number of astronauts that are on some galactic mission in this precise moment and plot them as floating dots scattered across the space of the window.</p></div><p>Discover more on the <a href="Github Repo">GitHub repo</a>.</p>',
+    title = 'How many people are there in the Outher Space, <b>NOW</b>?',
+    textBoxHeight,
+    speed = 3;
 
 function preload() {
   var someText = createDiv('<h1>'+title+'</h1><p>'+introText+'</p>');
@@ -36,18 +37,23 @@ function setup() {
 
   textBoxHeight = parseInt(window.getComputedStyle(document.getElementById("text-box"), null).height)
 
-  canvas = createCanvas(window.innerWidth,(window.innerHeight-textBoxHeight))
+  if (window.innerWidth<768) {
+    canvas = createCanvas(window.innerWidth, window.innerHeight*0.75)
+    speed = 2
+  } else {
+    canvas = createCanvas(window.innerWidth,(window.innerHeight-textBoxHeight))
+  }
   canvas.position(0, textBoxHeight);
   // frameRate(30)
   
   var colNum = 0;
   for(var i = 0; i < people.number; i = i + 1){
     positions.push({
-      x:random(width*0.1,width*0.9),
-      y:random(height*0.1,height*0.9),
+      x:random(width*0.2,width*0.8),
+      y:random(height*0.2,height*0.8),
       size:random(30,50),
-      speedx:random(-3,3),
-      speedy:random(-3,3),
+      speedx:random(-speed,speed),
+      speedy:random(-speed,speed),
       colour: unHexColours(palette[colNum])
     })
     colNum++;

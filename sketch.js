@@ -1,7 +1,7 @@
 var positions = [],
     img,
     myFontSize = 14,
-    palette = ['4882CC','FFFFC4','9F4B26','F3B404','C7578E','4882CC','FFFFC4','9F4B26','F3B404','C7578E','4882CC','FFFFC4','9F4B26','F3B404','C7578E','4882CC','FFFFC4','9F4B26','F3B404','C7578E','4882CC','FFFFC4','9F4B26','F3B404','C7578E','4882CC','FFFFC4','9F4B26','F3B404','C7578E','4882CC','FFFFC4','9F4B26','F3B404','C7578E','4882CC','FFFFC4','9F4B26','F3B404','C7578E','4882CC','FFFFC4','9F4B26','F3B404','C7578E'],
+    palette = ['4882CC','FFFFC4','9F4B26','F3B404','C7578E'],
     introText = '<p>This experiment is realised thanks to the awesome <a href="https://p5js.org">p5js</a> library.</p><p>The application connects with a <a href="https://api.open-notify.org/">service</a> that provides the real time number of astronauts that are on some galactic mission in this moment and plot them as floating dots scattered across the space of the window.</p><p>Discover more in the <a href="Github Repo">GitHub repo</a></p>.',
     title = 'How many people are there in the outher space, <b>NOW</b>?',
     textBoxHeight;
@@ -10,8 +10,9 @@ function preload() {
   var someText = createDiv('<h1>'+title+'</h1><p>'+introText+'</p>');
   someText.id('text-box')
 
-  var people = 'http://api.open-notify.org/astros.json?callback=CALLBACK'
-  loadJSON(people, doThings, manageErrors, 'jsonp');
+  var people = 'http://cors.io/?u=http://api.open-notify.org/astros.json'
+  loadJSON(people, doThings, manageErrors, 'json');
+  
 }
 
 function doThings(data){
@@ -38,7 +39,8 @@ function setup() {
   canvas = createCanvas(window.innerWidth,(window.innerHeight-textBoxHeight))
   canvas.position(0, textBoxHeight);
   // frameRate(30)
-
+  
+  var colNum = 0;
   for(var i = 0; i < people.number; i = i + 1){
     positions.push({
       x:random(width*0.1,width*0.9),
@@ -46,11 +48,13 @@ function setup() {
       size:random(30,50),
       speedx:random(-3,3),
       speedy:random(-3,3),
-      colour: unHexColours(palette[i])
+      colour: unHexColours(palette[colNum])
     })
+    colNum++;
+    if (colNum >= palette.length) {
+      colNum = 0;
+    }
   }
-
-  console.log(positions)
 
 }
 

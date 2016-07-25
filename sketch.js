@@ -8,10 +8,10 @@ var positions = [],
     speed = 3;
 
 function preload() {
-  var someText = createDiv('<h1>'+title+'</h1><p>'+introText+'</p>');
-  someText.id('text-box')
+  // var someText = createDiv('<h1>'+title+'</h1><p>'+introText+'</p>');
+  // someText.id('text-box')
 
-  var people = 'https://crossorigin.me/http://api.open-notify.org/astros.json'
+  var people = 'https://peopleinspace.herokuapp.com/'
   loadJSON(people, doThings, manageErrors, 'json');
   
 }

@@ -49,7 +49,7 @@ function setup() {
   frameRate(60)
   var colNum = 0
 
-  for(var i = 0; i < people.number; i = i + 1){
+  for(var i = 0; i < people.astronauts.length; i = i + 1){
 
     //speed of each circle (x and y)
     var spedx = random(-speed,speed)
@@ -59,12 +59,12 @@ function setup() {
     positions.push({
       x:random(width*0.2,width*0.8),
       y:random(height*0.2,height*0.8),
-      size: today.diff(moment(people.people[i].launchdate),'days'),
+      size: today.diff(moment(people.astronauts[i].launchdate),'days'),
       myspeedx : spedx,
       myspeedy : spedy,
       speedx:spedx,
       speedy:spedy,
-      colour: (people.people[i].title == 'Commander') ? unHexColours(palette[3]) : unHexColours(palette[0])
+      colour: (people.astronauts[i].role == 'Commander') ? unHexColours(palette[3]) : unHexColours(palette[0])
     })
 
     colNum++
@@ -103,7 +103,7 @@ function draw() {
     textStyle(BOLD);
     textAlign(CENTER);
     textSize(myFontSize);
-    text(people.people[i].name.toUpperCase(), d.x, d.y+d.size*0.5+myFontSize+2) // Text wraps within text box
+    text(people.astronauts[i].name.toUpperCase(), d.x, d.y+d.size*0.5+myFontSize+2) // Text wraps within text box
 
     // Update position according to speed and space available when sidebar is open
     d.x = d.x + d.speedx
@@ -168,7 +168,7 @@ function mousePressed() {
     
     // Look for the first circle that eventually contains the mouse pointer
     if( mouseX > (d.x - d.size/2) && mouseX < (d.x + d.size/2) && mouseY > (d.y - d.size/2) && mouseY < (d.y + d.size/2) ) {
-      changeInformation(people.people[i])
+      changeInformation(people.astronauts[i])
 
       // Open the sidebar
       select("#sidebar").elt.className = ''
@@ -193,8 +193,8 @@ function toggleSidebar(myClass) {
 function changeInformation(astro){
   // Fill elements with the correct information
   select("#astro-name").html(astro.name)
-  select('img',"#astro-img").elt.setAttribute('src',astro.biophoto)
-  select("#astro-role").html(astro.title)
+  select('img',"#astro-img").elt.setAttribute('src',astro.img)
+  select("#astro-role").html(astro.role)
   select("#astro-elapsed").html(today.diff(moment(astro.launchdate),'days') + ' days')
   select("#astro-ship").html(astro.location)
   select('span','#astro-flag').elt.className = 'flag-icon flag-icon-'+astro.countryIso.toLowerCase()

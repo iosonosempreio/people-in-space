@@ -27,7 +27,7 @@ coverage
 build/Release
 
 # Dependency directories
-# node_modules
+node_modules
 jspm_packages
 
 # Optional npm cache directory
@@ -37,12 +37,9 @@ jspm_packages
 .node_repl_history
 
 #others
-.DS_STORE
-.DS_Store
-**/.DS_STORE
-**/.DS_Store
-
 node_modules/flag-icon-css/*
 ! node_modules/flag-icon-css/flags/*
 ! node_modules/flag-icon-css/css/flag-icon.min.css
 
+**/.DS_STORE
+**/.DS_Store

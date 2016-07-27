@@ -28,6 +28,9 @@ build/Release
 
 # Dependency directories
 node_modules
+node_modules/*
+!node_modules/flag-icon-css/flags/*
+!node_modules/flag-icon-css/css/flag-icon.min.css
 jspm_packages
 
 # Optional npm cache directory
@@ -38,8 +41,7 @@ jspm_packages
 
 #others
 node_modules/flag-icon-css/*
-! node_modules/flag-icon-css/flags/*
-! node_modules/flag-icon-css/css/flag-icon.min.css
 
-**/.DS_STORE
-**/.DS_Store
+
+.DS_STORE
+.DS_Store

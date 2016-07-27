@@ -5,8 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>People in Space</title>
+
     <link href="https://fonts.googleapis.com/css?family=Droid+Sans:400,700" rel="stylesheet">
     <link href="style.css" rel="stylesheet">
+    <link href="node_modules/flag-icon-css/css/flag-icon.min.css" rel="stylesheet">
 
     <script src="libraries/p5.js" type="text/javascript"></script>
     <script src="libraries/p5.dom.js" type="text/javascript"></script>
@@ -17,6 +19,62 @@
 
   </head>
   <body>
-  <div id="text-box"><h1>How many people are there in the Outer Space, <b>NOW</b>?</h1><p></p><div class="only-big"><p>This experiment is realised thanks to the awesome <a href="https://p5js.org">p5js</a> library.</p><p>The application connects with a <a href="https://api.open-notify.org/">service</a> that provides in real time the number of astronauts that are on some galactic mission in this precise moment and plot them as floating dots scattered across the space of the window.</p></div><p>Discover more on the <a href="Github Repo">GitHub repo</a>.</p><p></p></div>
+    <div id="text-box">
+      <h1>How many people are there in the Outer Space, <b>NOW</b>?</h1>
+      <div class="only-big">
+        <p>This experiment is realised thanks to the awesome <a href="https://p5js.org">p5js</a> library.</p>
+        <p>Click or tap the <a href="#" onclick="toggleSidebar('about')">info</a> button for knowing more or visit the <a href="https://github.com/iosonosempreio/people-in-space">GitHub repo</a>.</p>
+      </div>
+    </div>
+    <div id="sidebar" class="closed">
+      <img id="icon-info" src="images/info.svg" onclick="toggleSidebar('about')" />
+      <div class="content astronauts">
+        <h2>Selected Astronaut</h2>
+        <h3 id="astro-name"></h3>
+        <div id="astro-img">
+          <img src="" />
+        </div>
+        <img class="icon-attributes" src="./images/icon-role.svg" />
+        <h4 id="astro-role"></h4>
+        <img class="icon-attributes" src="images/icon-elapsed.svg" />
+        <h4 id="astro-elapsed"></h4>
+        <img class="icon-attributes" src="images/icon-ship.svg" />
+        <h4 id="astro-ship"></h4>
+        <div id="astro-flag" class="icon-attributes flag"><span class="flag-icon flag-icon-us"></span></div>
+        <h4 id="astro-bio"><a href="http://www.jsc.nasa.gov/Bios/htmlbios/williamsj.pdf" target="_blank">Read the Bio</a></h4>
+        <img class="icon-attributes astro-twitter" src="images/icon-twitter.svg" />
+        <h4 id="astro-twitter" class="astro-twitter">Follow <a href="http://twitter.com/Astro_Jeff" target="_blank"></a></h4>
+
+      </div>
+      <div class="content about">
+        <h2>About the project</h2>
+        <p class="description">The application connects with a <a href="https://peopleinspace.herokuapp.com/" target="_blank">service</a> that provides real-time information of the astronauts that are on some galactic mission in this precise moment and plot them as floating coloured circles scattered across the space of the window.</p>
+        <h2 class="title-sub-section">Colour: role in the mission</h2>
+        <div id="legend-colour" class="legend">
+          <div>
+            <div class="circle yellow"></div>
+            <p>Ship's commander</p>
+          </div>
+          <div>
+            <div class="circle blue"></div>
+            <p>Flight Engineer</p>
+          </div>
+        </div>
+        <h2 class="title-sub-section">Size: days in space</h2>
+        <div id="legend-size" class="legend">
+          <div>
+            <div class="circle small"></div>
+            <div class="circle medium"></div>
+            <div class="circle big"></div>
+          </div>
+          <div>
+            <div id="real-min" class="circle small text"><p>19</p></div>
+            <div class="circle medium text"></div>
+            <div id="real-max" class="circle big text"><p>129</p></div>
+          </div>
+        </div>
+      </div>
+      <div id="close-sidebar" class="" onclick="toggleSidebar('closed')"></div>
+    </div>
   </body>
 </html>

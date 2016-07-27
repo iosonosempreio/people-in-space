@@ -3,13 +3,12 @@ body {
 	margin: 0;
 	background-color: #1A1728;
 	font-family: "Droid Sans", sans-serif;
-	/*color: #FFFFC4;*/
-} 
-
+}
 canvas {
 	vertical-align: top;
+	border: 0px solid red;
+	box-sizing: border-box;
 }
-
 #p5_loading {
 	width: 100%;
     background-color: #FFFFC4;
@@ -19,44 +18,332 @@ canvas {
     top: 0px;
     transition: all, 0.5s;
 }
-
-div#text-box {
+#text-box {
 	padding: 20px 36px;
     position: absolute;
     box-sizing: border-box;
 }
-
-.only-big {
-	height:0px;
-	opacity: 0;
-	transition: all,0.5s
-}
-
 h1 {
-	font-size: 36px;
+	font-size: 22px;
 	color: white;
 	letter-spacing: 1px;
 	font-style: normal;
 	font-weight: normal;
+	margin-top: 13px;
+	padding-right: 50px;
 }
-
+h2 {
+	font-family: Droid Sans, sans-serif;
+    font-size: 12px;
+    color: #4882CC;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: normal;
+   	margin: -4px 0 0 0px;
+}
+h3 {
+	font-family: Droid Sans, sans-serif;
+    font-size: 18px;
+    text-transform: capitalize;
+    font-weight: normal;
+	color: #1A1728;
+	letter-spacing: 1px;
+	margin: 2px 0 0 0px;
+}
+h4 {
+	margin: 0;
+	font-family: DroidSansMono, monospace;
+	font-size: 14px;
+	color: #1A1728;
+	letter-spacing: 0px;
+}
 p {
-	font-size: 18px;
+	font-size: 14px;
     color: white;
     line-height: 22px;
     letter-spacing: 0.5px;
     max-width: 700px;
     margin: 9px 0;
 }
-
 a {
 	color: #C7578E;
 	text-decoration: none;
 }
+#sidebar {
+	position: fixed;
+	top:0px;
+	right: 0px;
+	width: 100vw;
+	background-color: rgba(218,216,218,1);
+	height: 100vh;
+	z-index: 100;
+	text-align: center;
+	transition: all 0.5s;
+	overflow-y: scroll;
+}
+#sidebar > div {
+	opacity: 1;
+	transition: all, 0.25s;
+	transition-delay: 0.20s; 
+}
+#sidebar > .content {
+	padding-bottom: 30px;
+}
+#sidebar.closed{
+	width: 94px;
+	background-color: transparent;
+	overflow: initial;
+    height: 104px;
+    border-radius: 100px;
+}
+#sidebar.closed > div{
+	opacity: 0;
+	transition: all, 0.2s;
+	transition-delay: 0.0s; 
+}
+#sidebar > .content.astronauts {
+	display: block;
+}
+#sidebar > .content.about {
+	display: none;
+}
+#icon-info {
+	padding: 36px;
+	cursor: pointer;
+}
+#astro-name{
+}
+#astro-img{
+	width: 120px;
+	height: 120px;
+	border-radius: 100%;
+	border: 4px solid #FFFFC4;
+	overflow: hidden;
+	margin: auto;
+	margin-top: 18px;
+	margin-bottom: 4px;
+}
+
+#astro-img > img {
+	width: 100%;
+}
+#close-sidebar {
+    display: block;
+    width: 36px;
+    height: 36px;
+    border: 2px solid #C7578E;
+    border-radius: 100%;
+    position: fixed;
+    bottom: auto;
+    right: 30px;
+    transform: translateX(0);
+    top: 30px;
+    cursor: pointer;
+    transition: all, 0.25s;
+    transition-delay: 0.0s !important;
+}
+#close-sidebar::before, #close-sidebar::after {
+	content: '';
+    display: block;
+    height: calc(100%/18);
+    width: calc(100%/2);
+    background-color: #C7578E;
+    position: absolute;
+    top: 17px;
+    left: 9px;
+    transition-delay: 0.0s !important;
+}
+#close-sidebar::before {
+	transform: rotate(45deg);
+}
+#close-sidebar::after {
+	transform: rotate(135deg);
+}
+#sidebar.closed #close-sidebar {
+	display: none;
+}
+.icon-attributes {
+	margin-top: 18px;
+}
+.icon-attributes.flag {
+}
+.content.astronauts a {
+	color: #4882CC;
+}
+#sidebar.about {
+}
+#sidebar.about > .content.astronauts {
+	display: none;
+}
+#sidebar.about > .content.about {
+	display: block;
+}
+.content.about .title-sub-section{
+	margin-top: 36px;
+}
+.content.about p {
+	font-family: DroidSansMono, monospace;
+	font-size: 14px;
+	color: #1A1728;
+	letter-spacing: 0px;
+	padding: 0 30px;
+	text-align: left;
+}
+.content.about p.description {
+	width: calc(100% - 60px);
+}
+.legend .circle {
+	display: block;
+	border-radius: 100%;
+	background: rgba(26,22,40,0.60);
+	height: 15px;
+	width: 15px;
+}
+.legend .circle.yellow {
+	background-color: #F3B404;
+}
+.legend .circle.blue {
+	background-color: #4882CC;
+}
+.legend > div {
+	margin-top: 16px;
+}
+.content.about .legend div p {
+    padding: 0;
+    margin: 7px 0 0 0;
+    text-align: center;
+    font-size: 12px;
+    color: #1A1728;
+    letter-spacing: 1.71px;
+    text-transform: uppercase;
+    line-height: 14px;
+}
+#legend-colour {
+	display: flex;
+	justify-content: space-around;
+	align-items: flex-end;
+}
+#legend-colour > div {
+	width: 82px;
+	text-align: center;
+}
+#legend-colour .circle {
+	margin: auto;
+}
+#legend-size > div {
+	display: flex;
+	justify-content: space-around;
+	align-items: flex-end;
+	flex-direction: row;
+	padding: 0 26px;
+}
+#legend-size .circle.medium {
+	width: 40px;
+	height: 40px;
+}
+#legend-size .circle.big {
+	width: 70px;
+	height: 70px;
+}
+#legend-size .circle.text {
+	height: 28px !important;
+    border-radius: 0;
+    background-color: transparent;
+}
+#legend-size > div:nth-child(2) {
+	margin-top: 0px;
+}
+
 
 @media only screen and (min-width: 768px) {
-   .only-big {
-		height:auto;
-		opacity: 1;		
-	} 
+	h1 {
+		font-size: 36px;
+		margin-top: 16px;
+		padding-right: 0px;
+	}
+	h2 {
+	   	margin: 18px 0 0 0px;
+	}
+	p {
+		font-size: 18px;
+	}
+	#text-box{
+		padding-right:330px;
+	}
+	#sidebar {
+		width: 300px;
+		background-color: rgba(218,216,218,1);
+	}
+	#sidebar.closed{
+		width: 105px;
+	}
+	#close-sidebar {
+		position: absolute;
+		top: initial;
+		bottom: 30px;
+		right: calc(50% - 18px);
+	}
+	#close-sidebar:hover {
+		background-color: #FFFFC4;
+		transform: rotate(180deg);
+	}
+	#close-sidebar:hover::before, #close-sidebar:hover::after {
+		background-color: #C7578E;
+	}
+	#astro-img {
+	    margin-top: 30px;
+	    margin-bottom: 14px;
+	}
+	.icon-attributes {
+	    margin-top: 30px;
+	}
+	.legend .circle {
+		height: 20px;
+		width: 20px;
+	}
+	#legend-size .circle.medium {
+		width: 65px;
+		height: 65px;
+	}
+
+	#legend-size .circle.big {
+		width: 100px;
+		height: 100px;
+	}
+}
+
+@media only screen and (min-width: 992px) {
+	#text-box{
+		padding-right:360px;
+	}
+	#sidebar {
+		width: 360px;
+		background-color: rgba(218,216,218,1);
+	}
+}
+
+@media only screen and (min-width: 1200px) {
+	#text-box{
+		padding-right:420px;
+	}
+	#sidebar {
+		width: 420px;
+		background-color: rgba(218,216,218,1);
+	}
+}
+
+@media only screen and (max-height: 789px) {
+	#close-sidebar {
+	    position: fixed;
+	    bottom: auto;
+	    right: 30px;
+	    transform: translateX(0);
+	    top: 30px;
+	}
+}
+
+@media only screen and (min-height: 800px) {
+	.content.about .title-sub-section {
+	    margin-top: 72px;
+	}
 }

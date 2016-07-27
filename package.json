@@ -1,0 +1,22 @@
+{
+  "name": "people-in-space",
+  "version": "1.0.0",
+  "description": "Just a first experiment with the incredible <a href=\"https://p5js.org\">p5js</a> library.",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iosonosempreio/people-in-space.git"
+  },
+  "author": "iosonosempreio",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/iosonosempreio/people-in-space/issues"
+  },
+  "homepage": "https://github.com/iosonosempreio/people-in-space#readme",
+  "dependencies": {
+    "flag-icon-css": "^2.3.0"
+  }
+}

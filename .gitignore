@@ -38,5 +38,7 @@ jspm_packages
 
 .DS_STORE
 .DS_Store
+**/.DS_STORE
+**/.DS_Store
 
 !node_modules/flag-icon-css/css/flag-icon.min.css

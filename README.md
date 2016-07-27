@@ -8,4 +8,4 @@ The application connects with a [service](https://peopleinspace.herokuapp.com/) 
 - <a href="https://p5js.org">p5js</a>
 - <a href="https://github.com/technoboy10/crossorigin.me">crossorigin.me</a>
 - [moment.js](http://momentjs.com/)
--[Flag Icon CSS](https://github.com/lipis/flag-icon-css)
+- [Flag Icon CSS](https://github.com/lipis/flag-icon-css)

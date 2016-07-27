@@ -8,7 +8,8 @@ var positions = [],
     realMax= 0,
     today = moment(),
     sidebarClosed=true,
-    availableWidth;
+    availableWidth,
+    maxdist = 50;
 
 function unHexColours(hex) {
   hex = hex.match(/.{1,2}/g)
@@ -27,6 +28,7 @@ function manageErrors(data){
   console.log(data)
 }
 
+// preload data
 function preload() {
   var people = 'https://peopleinspace.herokuapp.com/'
   loadJSON(people, doThings, manageErrors, 'json')
@@ -44,6 +46,7 @@ function setup() {
     toggleSidebar('about')
   }
 
+  // create canvas
   canvas = createCanvas(windowWidth,(windowHeight-textBoxHeight))
   canvas.position(0, textBoxHeight);
   frameRate(60)
@@ -60,10 +63,10 @@ function setup() {
       x:random(width*0.2,width*0.8),
       y:random(height*0.2,height*0.8),
       size: today.diff(moment(people.astronauts[i].launchdate),'days'),
-      myspeedx : spedx,
-      myspeedy : spedy,
-      speedx:spedx,
-      speedy:spedy,
+      refSpeedX : spedx,
+      refSpeedY : spedy,
+      speedX:spedx,
+      speedY:spedy,
       colour: (people.astronauts[i].role == 'Commander') ? unHexColours(palette[3]) : unHexColours(palette[0])
     })
 
@@ -92,11 +95,14 @@ function draw() {
 
   availableWidth = sidebarClosed ? windowWidth : (windowWidth-int(select('#sidebar').style('width')))
 
+  //cycle through each astronaut
   positions.forEach(function(d,i){
+
     // Draw circles
     stroke(26,23,40)
     fill(d.colour)
     ellipse(d.x,d.y,d.size,d.size)
+
     // Draw texts
     fill(255) 
     textFont("Droid Sans")
@@ -106,8 +112,8 @@ function draw() {
     text(people.astronauts[i].name.toUpperCase(), d.x, d.y+d.size*0.5+myFontSize+2) // Text wraps within text box
 
     // Update position according to speed and space available when sidebar is open
-    d.x = d.x + d.speedx
-    d.y = d.y + d.speedy
+    d.x = d.x + d.speedX
+    d.y = d.y + d.speedY
     if (availableWidth < 1) {
       select('canvas').style('left', -windowWidth+'px')
     } else {
@@ -118,50 +124,58 @@ function draw() {
     // Create vectors to compute distance (using the dist function)
     var currPoint = createVector(d.x, d.y);
     var mousePoint = createVector(mouseX, mouseY);
+    var currDist = currPoint.dist(mousePoint);
 
 
-    // Update coordinates relative to the distance from the mouse pointer
-    if (currPoint.dist(mousePoint) <= 50) {
-        // Slow down speed according to mouse pointer
-        d.speedx = d.speedx >= 0 ? d.speedx - .3*Math.abs(d.myspeedx)*(1 / currPoint.dist(mousePoint)) :d.speedx + .3*Math.abs(d.myspeedx)*(1 / currPoint.dist(mousePoint));
-        d.speedy = d.speedy >= 0 ? d.speedy - .3*Math.abs(d.myspeedy)*(1 / currPoint.dist(mousePoint)) :d.speedy + .3*Math.abs(d.myspeedy)*(1 / currPoint.dist(mousePoint));
-    } else {
-      // Check collision with borders, handle special cases for the X axis
-      if((d.x+(d.size/2))+36 > availableWidth && d.speedx >= 0 )
+    // check if circles are near the pointer
+    if (currDist <= maxdist) {
+
+      // Slow down speed according to mouse pointer proximity
+      d.speedX = d.speedX >= 0 ? abs(d.refSpeedX) * (1 - (maxdist - currDist)/maxdist) : abs(d.refSpeedX) * (-1 + (maxdist - currDist)/maxdist);
+      d.speedY = d.speedY >= 0 ? abs(d.refSpeedY) * (1 - (maxdist - currDist)/maxdist) : abs(d.refSpeedY) * (-1 + (maxdist - currDist)/maxdist);
+    }
+
+    // If far from pointer, check collision with borders
+    else {
+
+      // Handle X axis cases
+      if((d.x+(d.size/2))+36 > availableWidth && d.speedX >= 0 )
       {
-        d.speedx =  Math.abs(d.myspeedx) * -1;
+        d.speedX =  Math.abs(d.refSpeedX) * -1;
       }
-      else if((d.x-(d.size/2))-36 < 0 && d.speedx < 0){
-        d.speedx =  Math.abs(d.myspeedx);
+      else if((d.x-(d.size/2))-36 < 0 && d.speedX < 0){
+        d.speedX =  Math.abs(d.refSpeedX);
       }
       else {
-        d.speedx = d.speedx >= 0 ?  Math.abs(d.myspeedx) :  Math.abs(d.myspeedx) * -1;
+        d.speedX = d.speedX >= 0 ?  Math.abs(d.refSpeedX) :  Math.abs(d.refSpeedX) * -1;
       }
-      //----------------
 
-      // Check collision with borders, handle special cases for the Y axis
-      if ((d.y+(d.size/2))+myFontSize > height && d.speedy >= 0){
-        d.speedy =  Math.abs(d.myspeedy) * -1;
+      // Handle X axis cases
+      if ((d.y+(d.size/2))+myFontSize > height && d.speedY >= 0){
+        d.speedY =  Math.abs(d.refSpeedY) * -1;
       }
-      else if  ((d.y-(d.size/2)) < 0 && d.speedy < 0) {
-        d.speedy =  Math.abs(d.myspeedy);
+      else if  ((d.y-(d.size/2)) < 0 && d.speedY < 0) {
+        d.speedY =  Math.abs(d.refSpeedY);
       }
       else {
-        d.speedy = d.speedy >= 0 ?  Math.abs(d.myspeedy) :  Math.abs(d.myspeedy) * -1;
+        d.speedY = d.speedY >= 0 ?  Math.abs(d.refSpeedY) :  Math.abs(d.refSpeedY) * -1;
       }
-      //----------------
     }
   })
 
 }
 
+
+// resize canvas on window resize
 function windowResized() {
   textBoxHeight = int(select('#text-box').style('height'))
   resizeCanvas(windowWidth,(windowHeight-textBoxHeight))
   canvas.position(0, textBoxHeight)
 }
 
+// handle click events
 function mousePressed() {
+
 // Loop through all circles
  for(var i = 0; i< positions.length; i++){
     var d = positions[i];
@@ -181,6 +195,7 @@ function mousePressed() {
 
 }
 
+// toggles the sidebar
 function toggleSidebar(myClass) {
   if (myClass != 'closed') {
     sidebarClosed = false
@@ -190,7 +205,9 @@ function toggleSidebar(myClass) {
   select("#sidebar").elt.className = myClass;
 }
 
+// updates information on sidebar
 function changeInformation(astro){
+
   // Fill elements with the correct information
   select("#astro-name").html(astro.name)
   select('img',"#astro-img").elt.setAttribute('src',astro.img)

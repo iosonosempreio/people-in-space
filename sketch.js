@@ -9,7 +9,8 @@ var positions = [],
     today = moment(),
     sidebarClosed=true,
     availableWidth,
-    maxdist = 50;
+    maxdist = 50,
+    thisAstronaut;
 
 function unHexColours(hex) {
   hex = hex.match(/.{1,2}/g)
@@ -182,6 +183,7 @@ function mousePressed() {
     
     // Look for the first circle that eventually contains the mouse pointer
     if( mouseX > (d.x - d.size/2) && mouseX < (d.x + d.size/2) && mouseY > (d.y - d.size/2) && mouseY < (d.y + d.size/2) ) {
+      thisAstronaut = i
       changeInformation(people.astronauts[i])
 
       // Open the sidebar
@@ -195,6 +197,21 @@ function mousePressed() {
 
 }
 
+function switchAstronaut(position){
+  console.log(position)
+
+  if (position > 5) {
+    position = 0;
+  } else if (position < 0) {
+    position = 5;
+  }
+
+  console.log(position)
+
+  thisAstronaut = position;
+  changeInformation(people.astronauts[thisAstronaut])
+}
+
 // toggles the sidebar
 function toggleSidebar(myClass) {
   if (myClass != 'closed') {
@@ -205,14 +222,33 @@ function toggleSidebar(myClass) {
   select("#sidebar").elt.className = myClass;
 }
 
+function toggleTimePassed(element,kind){
+  console.log(element)
+  if (kind =='elapsed') {
+    select('#icon-elapsed').class('').addClass('icon-attributes').addClass('left-off')
+    select('#astro-elapsed').style('display','none')
+    select('#icon-launch-date').class('').addClass('icon-attributes')
+    select('#astro-launch-date').style('display','block')
+  } else if (kind == 'launch') {
+    select('#icon-elapsed').class('').addClass('icon-attributes')
+    select('#astro-elapsed').style('display','block')
+    select('#icon-launch-date').class('').addClass('icon-attributes').addClass('right-off')
+    select('#astro-launch-date').style('display','none')
+  }
+  console.log(select('#icon-elapsed').class())
+  console.log(select('#icon-launch-date').class())
+}
+
 // updates information on sidebar
 function changeInformation(astro){
 
   // Fill elements with the correct information
   select("#astro-name").html(astro.name)
+  select('img',"#astro-img").elt.setAttribute('src','')
   select('img',"#astro-img").elt.setAttribute('src',astro.img)
   select("#astro-role").html(astro.role)
   select("#astro-elapsed").html(today.diff(moment(astro.launchdate),'days') + ' days')
+  select("#astro-launch-date").html('Launch: '+ moment(astro.launchdate).format("MMM D YYYY"))
   select("#astro-ship").html(astro.location)
   select('span','#astro-flag').elt.className = 'flag-icon flag-icon-'+astro.countryIso.toLowerCase()
   if (astro.biolink != '') {

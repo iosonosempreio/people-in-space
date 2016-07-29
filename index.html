@@ -6,7 +6,7 @@
 
     <title>People in Space</title>
 
-    <link href="https://fonts.googleapis.com/css?family=Droid+Sans:400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Droid+Sans+Mono|Droid+Sans:400,700" rel="stylesheet">
     <link href="style.css" rel="stylesheet">
     <link href="node_modules/flag-icon-css/css/flag-icon.min.css" rel="stylesheet">
 
@@ -31,13 +31,21 @@
       <div class="content astronauts">
         <h2>Selected Astronaut</h2>
         <h3 id="astro-name"></h3>
-        <div id="astro-img">
-          <img src="" />
+        <div class="box-image">
+          <img id="" class="arrow" src="images/arrow-left.svg" onclick="switchAstronaut(thisAstronaut-1)">
+          <div id="astro-img">
+            <img src="" />
+          </div>
+          <img id="" class="arrow" src="images/arrow-right.svg" onclick="switchAstronaut(thisAstronaut+1)">
         </div>
         <img class="icon-attributes" src="./images/icon-role.svg" />
         <h4 id="astro-role"></h4>
-        <img class="icon-attributes" src="images/icon-elapsed.svg" />
-        <h4 id="astro-elapsed"></h4>
+
+        <img id="" class="icon-attributes" src="images/icon-elapsed.svg" style="opacity:0;">
+        <img id="icon-elapsed" class="icon-attributes" src="images/icon-elapsed.svg" onclick="toggleTimePassed(this,'launch')" />
+        <img id="icon-launch-date" class="icon-attributes right-off" src="images/icon-launch.svg" onclick="toggleTimePassed(this,'elapsed')" />
+
+        <h4 id="astro-elapsed"></h4><h4 id="astro-launch-date"></h4>
         <img class="icon-attributes" src="images/icon-ship.svg" />
         <h4 id="astro-ship"></h4>
         <div id="astro-flag" class="icon-attributes flag"><span class="flag-icon flag-icon-us"></span></div>

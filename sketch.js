@@ -198,15 +198,12 @@ function mousePressed() {
 }
 
 function switchAstronaut(position){
-  console.log(position)
 
-  if (position > 5) {
+  if (position > people.astronauts.length-1 ) {
     position = 0;
   } else if (position < 0) {
-    position = 5;
+    position = people.astronauts.length-1;
   }
-
-  console.log(position)
 
   thisAstronaut = position;
   changeInformation(people.astronauts[thisAstronaut])

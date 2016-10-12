@@ -41,7 +41,6 @@ jspm_packages
 
 #others
 node_modules/flag-icon-css/*
-
-
 .DS_STORE
+.DS_Store
 .DS_Store
